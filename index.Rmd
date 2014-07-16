@@ -1,0 +1,62 @@
+---
+title       : Baseball Averages By Year
+subtitle    : For Interactive Analysis, using Shiny
+author      : Rick Walsh
+job         : Developing Data Products
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+
+---  
+
+## Baseball Database and Analysis
+
+1. Lahman provides raw data 
+2. Includes data such as Games, At Bats, Hits, HR's and more
+3. But provides no means for easy graphical display
+4. Introduce use of Shiny features to Lahman database
+5. Adds graphing capabilities to raw data
+6. Interactive nature of features allow for customized analysis  
+
+--- .class #id 
+
+## Example Data
+
+1. Sample data for four players from 1961 data set
+2. Includes ID, Games, At Bats, Hits and others, as shown
+```{r}
+library(Lahman)
+# subset for players with 200 or more AB per season
+sBatting <-subset(Batting, AB >= 200 & yearID==1961)
+# add in the Average column
+sBatting$avg <-  1000 * round (sBatting$H / sBatting$AB , 3) 
+# display some sample data
+sBatting[1:4,c(1,2,6,8,10,13,14,25)]
+```
+
+--- .class #id 
+
+## Histogram of Batting Averages for a Given Year
+Shiny app includes slider for year selection, as well as check boxes for average and median
+
+```{r, echo=FALSE}
+#display histogram of data
+hist(sBatting$avg, xlab='Batting Average (.000 times 1000)', col='lightblue', 
+  xlim=c(150,400), ylim=c(0,.02), breaks=15, main='Year 1961', freq=FALSE)
+```       
+
+--- .class #id 
+
+## Extending the Concept
+
+1. Additional graphs and plots for other relavent statistics can be provided
+2. Pitching, hitting, fielding and other statistics available for analysis
+3. Interactive features in Shiny allow for customization as in this example
+4. Countless possibilities!
+
+
+
+

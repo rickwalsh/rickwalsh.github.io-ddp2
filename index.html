@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Baseball Averages By Year</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Baseball Averages By Year">
+  <meta name="author" content="Rick Walsh">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Baseball Averages By Year</h1>
+    <h2>For Interactive Analysis, using Shiny</h2>
+    <p>Rick Walsh<br/>Developing Data Products</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Baseball Database and Analysis</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Lahman provides raw data </li>
+<li>Includes data such as Games, At Bats, Hits, HR&#39;s and more</li>
+<li>But provides no means for easy graphical display</li>
+<li>Introduce use of Shiny features to Lahman database</li>
+<li>Adds graphing capabilities to raw data</li>
+<li>Interactive nature of features allow for customized analysis<br></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Example Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Sample data for four players from 1961 data set</li>
+<li>Includes ID, Games, At Bats, Hits and others, as shown</li>
+</ol>
+
+<pre><code class="r">library(Lahman)
+# subset for players with 200 or more AB per season
+sBatting &lt;-subset(Batting, AB &gt;= 200 &amp; yearID==1961)
+# add in the Average column
+sBatting$avg &lt;-  1000 * round (sBatting$H / sBatting$AB , 3) 
+# display some sample data
+sBatting[1:4,c(1,2,6,8,10,13,14,25)]
+</code></pre>
+
+<pre><code>##       playerID yearID   G  AB   H HR RBI avg
+## 15   aaronha01   1961 155 603 197 34 120 327
+## 313  adairje01   1961 133 386 102  9  37 264
+## 486  adcocjo01   1961 152 562 160 35 108 285
+## 1145 allisbo01   1961 159 556 136 29 105 245
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Histogram of Batting Averages for a Given Year</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Shiny app includes slider for year selection, as well as check boxes for average and median</p>
+
+<p><img src="assets/fig/unnamed-chunk-2.png" alt="plot of chunk unnamed-chunk-2"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Extending the Concept</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Additional graphs and plots for other relavent statistics can be provided</li>
+<li>Pitching, hitting, fielding and other statistics available for analysis</li>
+<li>Interactive features in Shiny allow for customization as in this example</li>
+<li>Countless possibilities!</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Baseball Database and Analysis'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Example Data'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Histogram of Batting Averages for a Given Year'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Extending the Concept'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
